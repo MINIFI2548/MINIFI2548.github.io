@@ -3,6 +3,7 @@ let wrapper = document.querySelector(".wrapper");
 let paperCtn = document.querySelector(".paper-container");
 
 let currentFrame = 0
+const contentList = ['🤍', '💙'];
 
 body.addEventListener("click", click);
 
@@ -52,7 +53,9 @@ function endFrame(){
     }, 25);
 }
 
-const limit = 1000;
+
+
+const limit = 500;
 let numEmoji = 0;
 const max_width = document.body.clientWidth;
 
@@ -62,7 +65,7 @@ function runningText(){
     let width = document.body.clientWidth;
     let clientHeight = document.body.clientHeight;
 
-    let speed =  Math.random() * width / 2000  * 2 + 0.5;
+    let speed =  Math.random() * width / 1000  * 2 + 0.5;
     let size = Math.floor(Math.random() * 10 + 1);
     let top = Math.floor(Math.random() * 95);
     
@@ -70,12 +73,7 @@ function runningText(){
     e.style.fontSize = size + 'rem';
     e.style.top = top + '%';
 
-    if(numEmoji % 2 ==0){
-        e.innerText = '🤍';
-    }
-    else{
-        e.innerText = '💙';
-    }
+    e.innerText = contentList[numEmoji % contentList.length];
 
     e.classList.add('running-text');
 

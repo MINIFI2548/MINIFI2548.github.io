@@ -65,8 +65,18 @@ body{
     background-color: aliceblue;
     border-radius: 30px;
     text-align: center;
-    margin-top: 60px;
-    padding-top: 30px;
+    align-items: center;
+    justify-content: center;
+    /* margin-top: 60px;
+    padding-top: 30px; */
+}
+
+.paper img{
+    border-radius: 30px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: drop-shadow(2px 2px 3px gray);
 }
 
 .wrapper{
@@ -147,11 +157,13 @@ body{
     position: relative;
     width: 100vw;
     height: 100vh;
-    border: 1px solid white;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 
 .running-text{
-    content : "hi";
+    color: white;
     position: absolute;
     font-size: 50px;
     animation: runningText 1s linear infinite;
@@ -159,9 +171,14 @@ body{
 
 @keyframes runningText {
     0%{
+        opacity: 0;
         transform: translateX(-10vw);
     }
     100%{
         transform: translateX(95vw);
+        opacity: 0;
+    }
+    10%,90%{
+        opacity: 1;
     }
 }
