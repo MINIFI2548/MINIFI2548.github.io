@@ -5,9 +5,10 @@ let paper = document.querySelector(".paper");
 let gitbox = document.querySelector(".box");
 let cont = document.querySelector('.emoji-container');
 
+console.log("hello world");
 // ! เปิดซองจดหมาย
 
-//body.addEventListener('click', openEnvelope);
+body.addEventListener('click', openEnvelope);
 function openEnvelope(){
     console.log('open envelope');
     body.removeEventListener('click', openEnvelope);
@@ -31,7 +32,7 @@ function openEnvelope(){
 
 // ! เปิดการ๋ดทีละใบ
 function readLetter(){
-    console.log(paperCont);
+    console.log("drop letter");
     paperCont.classList.add('drop');
     paperCont.addEventListener('animationend', function(){
         gitbox.classList.add('on');
