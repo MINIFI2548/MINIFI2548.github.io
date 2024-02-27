@@ -7,7 +7,7 @@ let cont = document.querySelector('.emoji-container');
 
 // ! เปิดซองจดหมาย
 
-body.addEventListener('click', openEnvelope);
+//body.addEventListener('click', openEnvelope);
 function openEnvelope(){
     console.log('open envelope');
     body.removeEventListener('click', openEnvelope);
