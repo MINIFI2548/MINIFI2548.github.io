@@ -3,16 +3,21 @@
     --envelope-height : 30rem;
     --paper-widt : 37.5rem;
     --paper-height : 25rem;
+    --tape-color :#cc2424; 
+    --tape-color2: #ee2e2e;
 }
 html{
     font-size: calc(0.8 * 1vw + .2 * 1vh);
+    overflow: hidden;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
 }
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 body{
     position: relative;
     height: 100vh;
@@ -44,6 +49,9 @@ body{
     top: 50vh;
     z-index: 4;
 }
+.paper-container.drop{
+    animation: drop-paper 0.7s ease-in;
+}
 @keyframes paperOut {
     0%{
         top: calc(50vh - var(--envelope-height)/2 + 8rem + var(--envelope-height)/2);
@@ -56,6 +64,18 @@ body{
     100%{
         top: 50vh;
         z-index: 4;
+    }
+}
+@keyframes drop-paper {
+    0%{
+        opacity: 1;
+        transform-origin: 0% 0%;
+        transform: translateY(0) rotate(0deg);
+    }
+    100%{
+        opacity: 0;
+        transform-origin: 0% 0%;
+        transform: translateY(100vh) rotate(-180deg);
     }
 }
 .paper{  
@@ -142,10 +162,12 @@ body{
 } 
 @keyframes spinout-envelope{
     0%{
+        opacity: 1;
         transform-origin: 10% 10%;
         transform: translateX(0) rotate(0deg);
     }
     100%{
+        opacity: 0;
         transform-origin: 0% 0%;
         transform: translateX(-100vw) rotate(-360deg);
     }
@@ -153,13 +175,15 @@ body{
 
 /* ! runnig emoji */
 .emoji-container{
-    font-size: 5px;
     position: relative;
     width: 100vw;
     height: 100vh;
     -webkit-user-select: none; /* Safari */
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
+}
+.emoji-container.off{
+    display: none;
 }
 .running-text{
     color: white;
@@ -177,5 +201,276 @@ body{
     }
     10%,90%{
         opacity: 1;
+    }
+}
+
+/* ! gift box */
+.box{
+    position: relative;
+    width: 30rem;
+    height: 30rem;
+    align-items: center;
+    justify-content: center;
+    scale: 0.5;
+    display: none;
+}
+.box.on{
+    display: block;
+    .box-tape{
+        animation: bTape 1.5s ease-in-out infinite;
+    }
+    .box-tape-left{
+        animation: bLeft 1.5s ease-in-out infinite;
+    }
+    .box-tape-right{
+        animation: bRight 1.5s ease-in-out infinite;
+    }
+    .box-gifts{
+        animation: box-Bounce 1.5s ease-in-out infinite;
+    }
+    .box-gift{
+        animation: box-Bounce2 1.5s ease-in-out infinite;
+    }
+    .box-gift-shadow{
+        animation: boxShadoxBounce 1.5s ease-in-out infinite;
+    }
+}
+@keyframes bTape {
+    from,
+    50%{
+        transform: translateY(0) rotate(0);
+    }
+    62.5%{
+        transform: translateY(75%) rotate(0);
+    }
+    68.75%{
+        transform: translateY(-37.5%) rotate(15deg);
+    }
+    75%{
+        transform: translateY(-150%) rotate(5deg);
+    }
+    87.5%{
+        transform: translateY(65%) rotate(-3deg);
+    }
+    to{
+        transform: translateY(0) rotate(0);
+    }
+}
+@keyframes bLeft {
+    from,
+    50%{
+        transform: rotate(35deg);
+    }
+    62.5%{
+        transform: rotate(45deg);
+    }
+    75%{
+        transform: rotate(30deg);
+    }
+    87.5%{
+        transform: rotate(45deg);
+    }
+    to{
+        transform: rotate(35deg);
+    }
+}
+@keyframes bRight {
+    from,
+    50%{
+        transform: rotate(-35deg);
+    }
+    62.5%{
+        transform: rotate(-45deg);
+    }
+    75%{
+        transform: rotate(-30deg);
+    }
+    87.5%{
+        transform: rotate(-45deg);
+    }
+    to{
+        transform: rotate(-35deg);
+    }
+}
+@keyframes box-Bounce {
+    from,
+    50%{
+        transform: translateY(0) scale(1, 1);
+    }
+    62.5%{
+        transform: translateY(4%) scale(1.12, 0.89);
+    }
+    75%{
+        transform: translateY(-11%) scale(0.92, 1.1);
+    }
+    87.5%{
+        transform: translateY(0%) scale(1.05, 0.9);
+    }
+    to{
+        transform: translateY(0) scale(1, 1);
+    }
+}
+@keyframes box-Bounce2 {
+    from,
+    50%{
+        transform: translateY(0) scale(1, 1) rotate(0);
+    }
+    62.5%{
+        animation-timing-function: ease-in;
+        transform: translateY(45%) scale(1.14, 0.95) rotate(0);
+    }
+    68.75%{
+        animation-timing-function: ease-out;
+        transform: translateY(-22.5%) scale(1.05, 1.03) rotate(15deg);
+    }
+    75%{
+        animation-timing-function: ease-out;
+        transform: translateY(-90%) scale(0.96, 1.1)rotate(5deg);
+    }
+    87.5%{
+        transform: translateY(65%) scale(1.12, 0.93) rotate(-3deg);
+    }
+    to{
+        transform: translateY(0) scale(1, 1) rotate(0);
+    }
+}
+@keyframes boxShadoxBounce {
+    from,
+    50%{
+        transform: translateY(0) scale(1, 1) rotate(0);
+    }
+    62.5%{
+        animation-timing-function: ease-in;
+        transform: translateY(10%) scale(1.14, 0.95) rotate(0);
+    }
+    68.75%{
+        animation-timing-function: ease-out;
+        transform: translateY(-10%) scale(1.05, 1.03) rotate(15deg);
+    }
+    75%{
+        animation-timing-function: ease-out;
+        transform: translateY(-30%) scale(0.96, 1.1)rotate(5deg);
+    }
+    87.5%{
+        transform: translateY(10%) scale(1.12, 0.93) rotate(-3deg);
+    }
+    to{
+        transform: translateY(0) scale(1, 1) rotate(0);
+    }
+}
+.box-tape,
+.box-tape-left,
+.box-tape-right,
+.box-tape-center,
+.box-gifts,
+.box-gift-shadow,
+.box-gift,
+.box-lib{
+    position: absolute;
+}
+.box-tape-left,.box-tape-right,.box-tape-center{
+    background-color: var(--tape-color);
+}
+.box-tape{
+    bottom: 5rem;
+    left: calc(34.2rem/2  - 6.6rem );
+    width: 9rem;
+    height: 6rem;
+    transform-origin: 50% 230%;
+}
+.box-tape-center{
+    border-radius: 3rem;
+    width: 100%;
+    height: 100%;
+}
+.box-tape-left, 
+.box-tape-right{
+    box-shadow: 0 0 0 2.1rem var(--tape-color2) inset;
+    top: 0.9rem;
+    width: 12rem;
+    height: 15rem;
+    z-index: -1;
+}
+.box-tape-left::before, 
+.box-tape-right::before{
+    background-color: var(--tape-color2);
+    border-radius: inherit;
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+}
+.box-tape-left{
+    border-radius: 4.5rem 0 9rem 3rem/ 4.5rem 0 9rem 10.5rem;
+    right: calc(100% - 2.25rem);
+    transform: rotate(35deg);
+    transform-origin: 100% 15%;
+}
+.box-tape-left::before{
+    clip-path: polygon(0 42%, 100% 12%, 100%  100%, 0 100%);
+}
+.box-tape-right{
+    border-radius: 0 4.5rem 3rem 9rem/ 0 4.5rem 10.5rem 9rem;
+    left: calc(100% - 2.25rem);
+    transform: rotate(-35deg);
+    transform-origin: 0 15%;
+}
+.box-tape-right::before{
+    clip-path: polygon(0 12%, 100% 42%, 100%  100%, 0 100%);
+}
+.box-gifts{
+    background: linear-gradient(var(--tape-color), var(--tape-color)) 
+    50% 50% / 9.9rem 100% no-repeat,#dfd9d9;
+    border-radius: 1.5rem;
+    bottom: 0rem;
+    left: -2.1rem;
+    overflow: hidden;
+    width: 34.2rem;
+    height: 27rem;
+    z-index: 1;
+}
+.box-lib{
+    z-index: 4;
+}
+.box-gift,
+.box-gift-shadow{
+    border-radius: 1rem;
+    width: 39rem;
+    height: 9.9rem;
+}
+.box-gift{
+    background: linear-gradient(var(--tape-color), var(--tape-color)) 
+    50% 50% / 9.9em 100% no-repeat,#dfd9d9;
+    bottom: -3.9rem;
+    left: -4.5rem;
+    z-index: 4;
+}
+.box-gift-shadow{
+    background-color: #00000010;
+    top: -4.5rem;
+    left: -3rem;
+}
+.box.explosion{
+    .box-lib{
+        animation: lib-explsion 0.5s linear;
+    }
+    .box-gifts{
+        animation: bottom-explsion 0.5s linear;
+    }
+}
+@keyframes lib-explsion {
+    0%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(-100vh);
+    }
+}
+@keyframes bottom-explsion {
+    0%{
+        transform: translateY(0);
+    }
+    100%{
+        transform: translateY(100vh);
     }
 }
