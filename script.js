@@ -1,86 +1,67 @@
 let body = document.body;
-let wrapper = document.querySelector(".wrapper");
-let paperCtn = document.querySelector(".paper-container");
 
-let currentFrame = 0
-const contentList = ['🤍', '💙'];
+// ! เปิดซองจดหมาย
+let envelope = document.querySelector(".envelope");
+let paperCont = document.querySelector(".paper-container");
 
-body.addEventListener("click", click);
+body.addEventListener('click', openEnvelope);
+function openEnvelope(){
+    console.log('open envelope');
+    body.removeEventListener('click', openEnvelope);
 
-function click(){
-    switch(currentFrame){
-        case 0:
-            wrapper.classList.add("opening");
-            let waitWrapperOpen = setTimeout(paperout, 1000);
-            break;
-        case 1:
-            endFrame();
-            break;
-        default:
-            console.log("click");
-            break;
-        }
-}
-
-function paperout(){
-    console.log('paper outting');
-    paperCtn.classList.add("opening");
-    let waitWrapperOpen = setTimeout(function(){
-        wrapper.style.transitionDuration = 1 + 's';
-        wrapper.style.scale = 0.75;
-        wrapper.classList.remove('opening');
-    }, 750);
-
-    paperCtn.addEventListener('animationend', function(){
-        paperCtn.classList.remove("in-wrapper");
-        paperCtn.classList.remove("opening");
-        wrapper.classList.add('opened');
-        paperCtn.classList.add("opened");
+    envelope.classList.add('open');
+    paperCont.classList.add('opening');
+    paperCont.addEventListener('animationend', function(){
+        paperCont.classList.remove('opening');
+        paperCont.classList.add('opened');
+        envelope.style.animation = 'spinout-envelope 1s .2s linear';
+        envelope.addEventListener('animationend', function(){
+            envelope.remove();
+        },{once : true}
+        );
+    body.addEventListener('click', readLetter);
     },{once : true}
     );
-    wrapper.addEventListener('animationend', function(){
-        wrapper.remove();
-    }, {once : true}
-    );
-    currentFrame = 1;
+    paperCont.classList.remove('in-envelope');
+    console.log(envelope);
 }
 
+// ! เปิดการ๋ดทีละใบ
+function readLetter(){
+    console.log("read a letter");
+}
+
+// ! ข้อความวิ่งตอนจบ
 function endFrame(){
     let emojiLoop = setInterval(function(){
-        if(numEmoji < limit){
-            runningText()
-        }
+        runningText();
+        numEmoji++;
     }, 25);
 }
-
-
-
-const limit = 500;
+const limit = 1000;
 let numEmoji = 0;
-const max_width = document.body.clientWidth;
+const contentList = ['🤍', '💙'];
 
 function runningText(){
     let cont = document.querySelector('.emoji-container');
     let e = document.createElement('div');
-    let width = document.body.clientWidth;
+    let height = document.body.clientheight;
     let clientHeight = document.body.clientHeight;
 
-    let speed =  Math.random() * width / 1000  * 2 + 0.5;
-    let size = Math.floor(Math.random() * 10 + 1);
-    let top = Math.floor(Math.random() * 95);
+    let speed =  Math.random() * 2 + 1;
+    let size = Math.floor(Math.random() * 10 + 5);
+    let left = Math.floor(Math.random() * 105 - 5);
     
     e.style.animationDuration = speed + 's';
     e.style.fontSize = size + 'rem';
-    e.style.top = top + '%';
+    e.style.left = left + '%';
 
     e.innerText = contentList[numEmoji % contentList.length];
 
     e.classList.add('running-text');
 
     cont.appendChild(e);
-    numEmoji++;
     e.addEventListener('animationiteration', () => {
         e.remove();
-        numEmoji--;
     });
 }
