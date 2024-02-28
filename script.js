@@ -2,6 +2,7 @@ let body = document.body;
 let envelope = document.querySelector(".envelope");
 let paperCont = document.querySelector(".paper-container");
 let paper = document.querySelector(".paper");
+let greetingCard = document.querySelector(".greeting-card-container");
 let gitbox = document.querySelector(".box");
 let cont = document.querySelector('.emoji-container');
 
@@ -48,11 +49,14 @@ function readLetter(){
 function boxExplosion(){
     console.log("box boom");
     gitbox.classList.add('explosion');
+    greetingCard.classList.remove('hidden');
+    greetingCard.classList.add('show');
+    let firework = document.querySelector('.firework-container');
+    firework.classList.add('on');
+    endFrame();
     gitbox.addEventListener('animationend', function(){
         gitbox.remove();
         body.removeEventListener('click', boxExplosion);
-        cont.classList.remove('off');
-        endFrame();
     },{once : true}
     );
 }
@@ -62,7 +66,7 @@ function endFrame(){
     let emojiLoop = setInterval(function(){
         runningText();
         numEmoji++;
-    }, 25);
+    }, 75);
 }
 const limit = 1000;
 let numEmoji = 0;
@@ -73,7 +77,7 @@ function runningText(){
     let height = document.body.clientheight;
     let clientHeight = document.body.clientHeight;
 
-    let speed =  Math.random() * 2 + 1;
+    let speed =  Math.random() * 2 + 1.5;
     let size = Math.floor(Math.random() * 10 + 5);
     let left = Math.floor(Math.random() * 105 - 5);
     
