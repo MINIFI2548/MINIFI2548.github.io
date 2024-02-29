@@ -13,17 +13,14 @@ body.addEventListener('click', openEnvelope);
 function openEnvelope(){
     console.log('open envelope');
     body.removeEventListener('click', openEnvelope);
-
+    
+    document.querySelector('.letter1').classList.remove('on');
     envelope.classList.add('open');
     paperCont.classList.add('opening');
     paperCont.addEventListener('animationend', function(){
         paperCont.classList.remove('opening');
+        envelope.classList.add('opened');
         paperCont.classList.add('opened');
-        envelope.style.animation = 'spinout-envelope 1s .2s linear';
-        envelope.addEventListener('animationend', function(){
-            envelope.remove();
-        },{once : true}
-        );
     body.addEventListener('click', readLetter);
     },{once : true}
     );
@@ -33,6 +30,11 @@ function openEnvelope(){
 
 // ! เปิดการ๋ดทีละใบ
 function readLetter(){
+    envelope.style.animation = 'spinout-envelope 1s .1s linear';
+        envelope.addEventListener('animationend', function(){
+            envelope.remove();
+        },{once : true}
+        );
     console.log("drop letter");
     paperCont.classList.add('drop');
     paperCont.addEventListener('animationend', function(){

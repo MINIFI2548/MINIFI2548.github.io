@@ -3,8 +3,8 @@
     --envelope-height : 30rem;
     --paper-widt : 37.5rem;
     --paper-height : 25rem;
-    --tape-color :#cc2424; 
-    --tape-color2: #ee2e2e;
+    --tape-color :#4476cc; 
+    --tape-color2: rgb(74, 143, 223);
 }
 html{
     font-size: calc(0.8 * 1vw + .5 * 1vh);
@@ -30,6 +30,34 @@ body{
     overflow: hidden;
 }
 
+/* ! letter1 */
+.letter1{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.letter1.on{
+    animation: letter-Bounce 2s ease-in-out infinite;
+}
+@keyframes letter-Bounce {
+    from,
+    50%{
+        transform: translateY(0) scale(1, 1);
+    }
+    62.5%{
+        transform: translateY(4%) scale(1.12, 0.89);
+    }
+    75%{
+        transform: translateY(-11%) scale(0.92, 1.1);
+    }
+    87.5%{
+        transform: translateY(0%) scale(1.05, 0.9);
+    }
+    to{
+        transform: translateY(0) scale(1, 1);
+    }
+}
 /* ! paper container */
 .paper-container{
     position: absolute;
@@ -39,14 +67,14 @@ body{
     z-index: 1;
 }
 .paper-container.in-envelope{
-    top: calc(50vh - var(--envelope-height)/2 + 8rem + var(--envelope-height)/2);
+    top: 8rem;
 }
 .paper-container.opening{
-    top: calc(50vh - var(--envelope-height)/2 + 8rem + var(--envelope-height)/2);
-    animation: paperOut 1s linear .7s;
+    top: 8rem;
+    animation: paperOut 1s ease-in-out .7s;
 }
 .paper-container.opened{
-    top: 50vh;
+    top: 4rem;
     z-index: 4;
 }
 .paper-container.drop{
@@ -54,15 +82,19 @@ body{
 }
 @keyframes paperOut {
     0%{
-        top: calc(50vh - var(--envelope-height)/2 + 8rem + var(--envelope-height)/2);
+        top: 8rem;
         z-index: 1;
     }
     50%{
-        transform: translateY(-30rem);
+        transform: translateY(-27rem);
+        z-index: 1;
+    }
+    60%{
+        transform: translateY(-27rem);
         z-index: 1;
     }
     100%{
-        top: 50vh;
+        top: 4rem;
         z-index: 4;
     }
 }
@@ -104,7 +136,7 @@ img{
     justify-content: center;
     align-items: center;
     background-color: #3760c9;
-    top: calc(50vh - var(--envelope-height)/2 + 8rem);
+    top: -8rem;
 }
 .envelope-front{
     position: absolute;
@@ -153,8 +185,19 @@ img{
         transform: rotateX(180deg);
         z-index: 0;
     }  
-    /* animation: spinout-envelope 1s ease-in-out; */
 } 
+.envelope.opened{
+    filter: brightness(80%);
+    animation: fade-down 0.2s linear;
+}
+@keyframes fade-down {
+    0%{
+        filter: brightness(100%);
+    }
+    100%{
+        filter: brightness(80%);
+    }
+}
 @keyframes spinout-envelope{
     0%{
         opacity: 1;
@@ -166,6 +209,14 @@ img{
         transform-origin: 0% 0%;
         transform: translateX(-100vw) rotate(-360deg);
     }
+}
+.envelope p{
+    position: absolute;
+    z-index: 2;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 2rem;
+
 }
 
 /* ! runnig emoji */
@@ -432,7 +483,7 @@ img{
 }
 .box-gifts{
     background: linear-gradient(var(--tape-color), var(--tape-color)) 
-    50% 50% / 9.9rem 100% no-repeat,#dfd9d9;
+    50% 50% / 9.9rem 100% no-repeat,#d8e8fa;
     border-radius: 1.5rem;
     bottom: 0rem;
     left: -2.1rem;
@@ -452,7 +503,7 @@ img{
 }
 .box-gift{
     background: linear-gradient(var(--tape-color), var(--tape-color)) 
-    50% 50% / 9.9em 100% no-repeat,#dfd9d9;
+    50% 50% / 9.9em 100% no-repeat,#d8e8fa;
     bottom: -3.9rem;
     left: -4.5rem;
     z-index: 4;
@@ -472,18 +523,28 @@ img{
 }
 @keyframes lib-explsion {
     0%{
-        transform: translateY(0);
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+    60%{
+        transform: translateY(-60vh) rotate(15deg);
     }
     100%{
-        transform: translateY(-100vh);
+        opacity: 0;
+        transform: translateY(-100vh) rotate(45deg);
     }
 }
 @keyframes bottom-explsion {
     0%{
-        transform: translateY(0);
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+    60%{
+        transform: translateY(60vh) rotate(15deg);
     }
     100%{
-        transform: translateY(100vh);
+        opacity: 0;
+        transform: translateY(100vh) rotate(45deg);
     }
 }
 
@@ -509,17 +570,17 @@ img{
     0%{
         z-index: -1;
         scale: 0.1;
-        transform: translateY(30rem);
+        transform: translateY(30rem) rotate(45deg);
     }
     30%{
         scale: 0.1;
-        transform: translateY(0rem);
+        transform: translateY(0rem) rotate(45deg);
     }
     100%{
         display: flex;
         z-index: 1;
         scale: 1;
-        transform: translateY(0rem);
+        transform: translateY(0rem) rotate(0deg);
     }
 }
 .p2 img{
@@ -533,11 +594,18 @@ img{
 }
 
 /* ! firework */
+.firework-container{
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-self: center;
+    width: var(--paper-widt);
+    height: var(--paper-height);
+}
 .firework{
     position: absolute;
     z-index: 4;
 }
-
 .firework-container.on{
     .firework-explosion::before{
         content: "";
@@ -551,39 +619,39 @@ img{
     }
     .f1{
         .firework-explosion::before{
-            animation: firework-explosion .7s  0.3s ease-in-out;
+            animation: firework-explosion .7s  0.3s ease-in-out 2;
         }
     }
     .f2{
         .firework-explosion::before{
-            animation: firework-explosion .9s  0.2s ease-in-out;
+            background-color: #eb961e;
+            animation: firework-explosion .9s  0.2s ease-in-out 2;
         }
     }
     .f3{
         .firework-explosion::before{
-            animation: firework-explosion .5s  0.1s ease-in-out;
+            background-color: #eaa550;
+            animation: firework-explosion .5s  0.1s ease-in-out 3;
         }
     }
 }
-
 .f1{
-    left: 36vw;
-    top: 34vh;
+    left: -2rem;
+    top: 2rem;
 }
 .f2{
     scale: 0.7;
-    right: 31vw;
-    top: 45vh;
+    right: -3rem;
+    top: 12rem;
 }
 .f3{
     scale: 0.5;
-    left: 45vw;
-    top: 60vh;
+    left: 12rem;
+    bottom: -2rem;
     .firework-explosion{
         width: 0.7rem;
     }
 }
-
 .firework-explosion{
     position: absolute;
     left: 0rem;
