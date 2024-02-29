@@ -46,8 +46,7 @@ function readLetter(){
     body.addEventListener('click', boxExplosion);
 }
 
-// body.addEventListener('click', boxExplosion);
-// ! เปิดกล่องของขวัญ
+// ! เปิดกล่อง
 function boxExplosion(){
     console.log("box boom");
     gitbox.classList.add('explosion');
