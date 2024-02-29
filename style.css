@@ -618,19 +618,19 @@ img{
     }
     .f1{
         .firework-explosion::before{
-            animation: firework-explosion .7s  0.3s ease-in-out 2;
+            animation: firework-explosion .7s  0.3s ease-in-out;
         }
     }
     .f2{
         .firework-explosion::before{
             background-color: #eb961e;
-            animation: firework-explosion .9s  0.2s ease-in-out 2;
+            animation: firework-explosion .9s  0.2s ease-in-out;
         }
     }
     .f3{
         .firework-explosion::before{
             background-color: #eaa550;
-            animation: firework-explosion .5s  0.1s ease-in-out 3;
+            animation: firework-explosion .5s  0.1s ease-in-out;
         }
     }
 }

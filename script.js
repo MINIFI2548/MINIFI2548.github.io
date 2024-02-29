@@ -58,6 +58,12 @@ function boxExplosion(){
     gitbox.addEventListener('animationend', function(){
         gitbox.remove();
         body.removeEventListener('click', boxExplosion);
+        body.addEventListener('click', function(){
+            firework.classList.add('on');
+            firework.children[0].addEventListener('animationend', function(){
+                firework.classList.remove('on');
+            });
+        });
     },{once : true}
     );
 }
